@@ -4,24 +4,18 @@ import crypto from "crypto";
 import CheckIt from "checkit";
 
 import Bookshelf from "../db";
-import { sanitize, isName, isID, isExist } from '../helpers/validate';
+import { sanitize, isName } from '../helpers/validate';
 
-// related models
-// just importing to register it to the Bookshelf register
-import "./users-addresses.js";
-
-class Users extends Bookshelf.Model {
+class Weapon extends Bookshelf.Model {
 
     // Initialization
     initialize () {
 
         // defining events for validation and other stuff
-        /*
         this.on("creating", (model, attrs, options) => {
             this.attributes.ID = (this.attributes.ID) ? this.attributes.ID : crypto.randomBytes(16);
             this.id = this.attributes.ID; // because we are using custom id and to overwrite native properties
         }, this);
-        */
 
         this.on("saving", (model, attrs, options) => {
 
@@ -32,7 +26,7 @@ class Users extends Bookshelf.Model {
                 // sanitizing the input
                 this.attributes[key] = (key.includes("ID")) ? this.attributes[key] : sanitize(this.attributes[key]);
 
-                validateObj[key] = (!key.includes("ID")) ? this.attributes[key] : this.attributes[key];
+                validateObj[key] = (!key.includes("ID")) ? this.attributes[key] : this.attributes[key].toString("hex");
                 validateRule[key] = Users.validation_rules()[key];
             });
 
@@ -48,29 +42,36 @@ class Users extends Bookshelf.Model {
         Bookshelf.Model.apply(this, arguments);
     }
 
-    get tableName () { return "users" } // table to map with the DB
+    get tableName () { return "weapons" } // table to map with the DB
 
     get idAttribute () { return "ID" }
-
-
-    // Relations
-    addresses () { return this.hasMany('Users_Addresses', 'User_ID') }
-
 
     // Validation Rules
     static validation_rules () { return {
         ID: ['required', val => {
-            if (! val instanceof Number) throw new Error("The ID is not valid number");
+            if (! val instanceof Number) throw new Error("The ID is not valid Number");
         }],
         
-        Name: ['required', val => {
-            if(! val instanceof String) throw new Error('The name is not a valid string')
+        Name: ['required', 'name'],
+
+        Dmg: ['required', val => {
+            if (! val instanceof Number) throw new Error("The ID is not valid Number");
         }],
+
+        Price: ['required', val => {
+            if (! val instanceof Number) throw new Error("The ID is not valid Number");
+        }],
+
+        Auto: ['required', val => {
+            if (! val instanceof Number) throw new Error("The ID is not valid Number");
+        }],
+
+        Src: ['required', 'src'],
     }}
 
 
     // Helper Function
-    get StringID () { return this.attributes.ID }
+    get StringID () { return this.attributes.ID.toString() }
 
     set StringID (string = null) {
         if (string === null) return false;
@@ -79,4 +80,4 @@ class Users extends Bookshelf.Model {
 
 }
 
-export default Bookshelf.model("Users", Users);
+export default Bookshelf.model("Weapon", Weapon);

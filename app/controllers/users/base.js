@@ -34,9 +34,7 @@ class Base {
     post (req, res) {
 
         const user = new Users({
-            Phone: req.body.phone,
             Name: req.body.name,
-            Email: req.body.email
         });
 
         user.save()

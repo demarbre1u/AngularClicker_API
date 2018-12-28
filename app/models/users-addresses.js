@@ -69,11 +69,11 @@ class Users_Addresses extends Bookshelf.Model {
 
 
     // Helper Function
-    get StringID () { return this.attributes.ID.toString("hex") }
+    get StringID () { return this.attributes.ID.toString() }
 
     set StringID (string = null) {
         if (string === null) return false;
-        return this.attributes.ID = new Buffer(string, "hex");
+        return this.attributes.ID = string;
     }
 
 }

@@ -3,6 +3,7 @@
 import Base from "./base";
 import IdParameter from "./id-parameter";
 import IdParameterAddress from "./id-parameter-address";
+import UserByName from "./user-by-name";
 
 module.exports = (router, middlewares) => {
 
@@ -17,7 +18,12 @@ module.exports = (router, middlewares) => {
         .get(base.get) // fetch all users
         .post(base.post); // create new user
 
+    const userByName = new UserByName();
+    router.route('/users/:name')
+        .all(userByName.all)
+        .get(userByName.get)
     // always place route with parameter at the end so that above routes become valid
+    /*
     const idParameter = new IdParameter();
     router.route('/users/:id')
         .all(middlewares.authenticate) // protected route
@@ -30,5 +36,5 @@ module.exports = (router, middlewares) => {
         .all(middlewares.authenticate) // protected route
         .get(address.get) // fetch all address of user by id
         .post(address.post); // create new address for the user by id
-
+    */
 };
