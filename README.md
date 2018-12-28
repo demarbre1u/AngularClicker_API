@@ -6,6 +6,9 @@ Using: MySQL, NodeJS, Express, Bookshelf, Knex, Json Web Token(JWT)
 
 Using ES6, with Babel (http://babeljs.io/)
 
+## Boilerplate
+
+This API is based on a boilerplate you can find [here](https://github.com/raghavgarg1257/nodejs-mysql-boilerplate).
 
 ## Pre-requisites:
 1. NodeJS (https://nodejs.org/en/)
