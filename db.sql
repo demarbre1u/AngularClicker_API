@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  ven. 28 déc. 2018 à 16:55
+-- Généré le :  lun. 31 déc. 2018 à 11:04
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.1.12
 
@@ -46,7 +46,11 @@ INSERT INTO `monsters` (`id`, `name`, `hpMax`, `gold`, `src`, `id_zone`) VALUES
 (10, 'Sweetie', 600, 140, 'assets/img/monster/heart.svg', 3),
 (11, 'John the Cloud', 700, 180, 'assets/img/monster/cloud.svg', 3),
 (12, 'Sunny Delight', 800, 220, 'assets/img/monster/sun.svg', 3),
-(13, 'Neil', 800, 220, 'assets/img/monster/moon.svg', 3);
+(13, 'Neil', 800, 220, 'assets/img/monster/moon.svg', 3),
+(14, 'Spider', 1200, 300, 'assets/img/monster/spider.svg', 4),
+(15, 'Ant Eater', 1350, 380, 'assets/img/monster/anteater.svg', 4),
+(16, 'Ant', 1500, 460, 'assets/img/monster/ant.svg', 4),
+(17, 'Mole', 1650, 540, 'assets/img/monster/mole.svg', 4);
 
 -- --------------------------------------------------------
 
@@ -89,7 +93,8 @@ INSERT INTO `weapons` (`id`, `name`, `price`, `dmg`, `auto`, `src`) VALUES
 (8, 'Lightning Bolt', 200, 0, 10, 'assets/img/weapon/thunder.svg'),
 (9, 'Poisoned Dagger', 300, 10, 10, 'assets/img/weapon/dagger.svg'),
 (10, 'Kunai', 40, 4, 3, 'assets/img/weapon/kunai.svg'),
-(11, 'Iron Mace', 350, 25, 0, 'assets/img/weapon/iron-mace.svg');
+(11, 'Iron Mace', 350, 25, 0, 'assets/img/weapon/iron-mace.svg'),
+(12, 'Holy Shovel', 3000, 100, 0, 'assets/img/weapon/shovel.svg');
 
 -- --------------------------------------------------------
 
@@ -111,7 +116,8 @@ CREATE TABLE `zones` (
 INSERT INTO `zones` (`id`, `name`, `bg`, `limiter`) VALUES
 (1, 'dark', 'assets/img/bg/black.svg', 20),
 (2, 'water', 'assets/img/bg/water.svg', 20),
-(3, 'sky', 'assets/img/bg/light.svg', -1);
+(3, 'sky', 'assets/img/bg/light.svg', 20),
+(4, 'underground', 'assets/img/bg/underground.svg', -1);
 
 --
 -- Index pour les tables déchargées
@@ -149,22 +155,22 @@ ALTER TABLE `zones`
 -- AUTO_INCREMENT pour la table `monsters`
 --
 ALTER TABLE `monsters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `weapons`
 --
 ALTER TABLE `weapons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `zones`
 --
 ALTER TABLE `zones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
