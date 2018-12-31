@@ -21,7 +21,7 @@ class ZoneBase {
                 });
             }
             else {
-                res.status(HTTP.NOT_FOUND).json({ message: "No Zone found", data:error.message })
+                res.status(HTTP.NOT_FOUND).json({ message: "No Zone found" })
             }
         })
         .catch((error) => { ISE(error, res) });

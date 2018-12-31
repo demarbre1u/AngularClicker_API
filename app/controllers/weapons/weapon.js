@@ -24,7 +24,7 @@ class WeaponBase {
                 });
             }
             else {
-                res.status(HTTP.NOT_FOUND).json({ message: "No Weapon found", data:error.message })
+                res.status(HTTP.NOT_FOUND).json({ message: "No Weapon found" })
             }
         })
         .catch((error) => { ISE(error, res) });

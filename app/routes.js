@@ -6,6 +6,7 @@ import _users from "./controllers/users";
 import _weapons from "./controllers/weapons";
 import _monsters from "./controllers/monsters";
 import _zones from "./controllers/zones";
+import _saves from "./controllers/saves";
 
 module.exports = express => {
 
@@ -27,6 +28,7 @@ module.exports = express => {
     _weapons(router, middlewares);
     _monsters(router, middlewares);
     _zones(router, middlewares);
+    _saves(router, middlewares);
 
     // at this point router will contain all the routes and now it can be added to the express instance
 

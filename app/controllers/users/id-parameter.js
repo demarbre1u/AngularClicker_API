@@ -37,22 +37,21 @@ class IdParameter {
     // PUT request
     put (req, res) {
 
-        if (!isID(req.params.id)) res.status(HTTP.BAD_REQUEST).json({ message: "Invalid ID" });
+        if (!req.params.id instanceof Number) res.status(HTTP.BAD_REQUEST).json({ message: "Invalid ID" });
 
-        Users.where({'ID': new Buffer(req.params.id, "hex")}).fetch()
+        Users.where({'ID': req.params.id}).fetch()
         .then( user => {
             if (user) {
 
                 let updateObj = {};
                 if (req.body.name) updateObj.Name = req.body.name;
-                if (req.body.phone) updateObj.Phone = req.body.phone;
-                if (req.body.email) updateObj.Email = req.body.email;
+                if (req.body.id_save) updateObj.id_save = req.body.id_save;
 
                 if (Object.keys(updateObj).length === 0) {
                     res.status(HTTP.BAD_REQUEST).json({ message: "No parameter given"});
                 }
                 else {
-                    Users.where({'ID': new Buffer(req.params.id, "hex")})
+                    Users.where({'ID': req.params.id})
                     .save(updateObj, { patch:true }) // why using patch: so to update selective fields
                     .then( model => {
                         res.status(HTTP.OK).json({

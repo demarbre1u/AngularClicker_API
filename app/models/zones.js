@@ -52,6 +52,7 @@ class Zones extends Bookshelf.Model {
 
     // Relations
     monsters () { return this.hasMany('monsters', 'id_zone') }
+    saves () { return this.hasMany('saves', 'id_zone', 'id') }
 
 
     // Validation Rules

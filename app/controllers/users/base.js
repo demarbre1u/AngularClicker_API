@@ -49,7 +49,8 @@ class Base {
             res.status(HTTP.OK).json({
                 message: "User successfully created",
                 data: {
-                    id: model.StringID,
+                    ID: model.StringID,
+                    Name: model.getName,
                     token: token
                 }
             });
@@ -58,8 +59,6 @@ class Base {
         .catch((error) => { ModelError(error, res) });
 
     }
-
-
 }
 
 export default Base;

@@ -24,7 +24,7 @@ class MonsterBase {
                 });
             }
             else {
-                res.status(HTTP.NOT_FOUND).json({ message: "No Monster found", data:error.message })
+                res.status(HTTP.NOT_FOUND).json({ message: "No Monster found" })
             }
         })
         .catch((error) => { ISE(error, res) });
