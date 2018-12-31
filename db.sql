@@ -1,25 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost:3306
--- Généré le :  lun. 31 déc. 2018 à 11:04
--- Version du serveur :  5.6.38
--- Version de PHP :  7.1.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Base de données :  `angular_clicker`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `monsters`
---
-
 CREATE TABLE `monsters` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
@@ -28,10 +6,6 @@ CREATE TABLE `monsters` (
   `src` text NOT NULL,
   `id_zone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `monsters`
---
 
 INSERT INTO `monsters` (`id`, `name`, `hpMax`, `gold`, `src`, `id_zone`) VALUES
 (1, 'Billy the Bat', 10, 2, 'assets/img/monster/bat.svg', 1),
@@ -52,22 +26,21 @@ INSERT INTO `monsters` (`id`, `name`, `hpMax`, `gold`, `src`, `id_zone`) VALUES
 (16, 'Ant', 1500, 460, 'assets/img/monster/ant.svg', 4),
 (17, 'Mole', 1650, 540, 'assets/img/monster/mole.svg', 4);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
+CREATE TABLE `saves` (
+  `id` int(11) NOT NULL,
+  `gold` int(11) NOT NULL,
+  `dmg` int(11) NOT NULL,
+  `auto` int(11) NOT NULL,
+  `progress` int(11) NOT NULL,
+  `weapons` text NOT NULL,
+  `id_zone` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(50) NOT NULL
+  `Name` varchar(50) NOT NULL,
+  `id_save` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `weapons`
---
 
 CREATE TABLE `weapons` (
   `id` int(11) NOT NULL,
@@ -75,32 +48,23 @@ CREATE TABLE `weapons` (
   `price` int(11) NOT NULL,
   `dmg` int(11) NOT NULL,
   `auto` int(11) NOT NULL,
+  `type` int(11) NOT NULL COMMENT '0 : weapon, 1 : magic',
   `src` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `weapons`
---
-
-INSERT INTO `weapons` (`id`, `name`, `price`, `dmg`, `auto`, `src`) VALUES
-(1, 'Wooden Sword', 10, 4, 0, 'assets/img/weapon/wooden_sword.svg'),
-(2, 'Iron Sword', 50, 7, 0, 'assets/img/weapon/iron_sword.svg'),
-(3, 'Golden Sword', 100, 10, 0, 'assets/img/weapon/golden_sword.svg'),
-(4, 'Enchanted Sword', 150, 13, 5, 'assets/img/weapon/magic_sword.svg'),
-(5, 'Fire Ball', 200, 0, 10, 'assets/img/weapon/fire.svg'),
-(6, 'Holy Nova', 300, 0, 15, 'assets/img/weapon/light.svg'),
-(7, 'Water Gun', 200, 0, 10, 'assets/img/weapon/water.svg'),
-(8, 'Lightning Bolt', 200, 0, 10, 'assets/img/weapon/thunder.svg'),
-(9, 'Poisoned Dagger', 300, 10, 10, 'assets/img/weapon/dagger.svg'),
-(10, 'Kunai', 40, 4, 3, 'assets/img/weapon/kunai.svg'),
-(11, 'Iron Mace', 350, 25, 0, 'assets/img/weapon/iron-mace.svg'),
-(12, 'Holy Shovel', 3000, 100, 0, 'assets/img/weapon/shovel.svg');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `zones`
---
+INSERT INTO `weapons` (`id`, `name`, `price`, `dmg`, `auto`, `type`, `src`) VALUES
+(1, 'Wooden Sword', 10, 4, 0, 0, 'assets/img/weapon/wooden_sword.svg'),
+(2, 'Iron Sword', 50, 7, 0, 0, 'assets/img/weapon/iron_sword.svg'),
+(3, 'Golden Sword', 100, 10, 0, 0, 'assets/img/weapon/golden_sword.svg'),
+(4, 'Enchanted Sword', 150, 13, 5, 0, 'assets/img/weapon/magic_sword.svg'),
+(5, 'Fire Ball', 200, 0, 10, 1, 'assets/img/weapon/fire.svg'),
+(6, 'Holy Nova', 300, 0, 15, 1, 'assets/img/weapon/light.svg'),
+(7, 'Water Gun', 200, 0, 10, 1, 'assets/img/weapon/water.svg'),
+(8, 'Lightning Bolt', 200, 0, 10, 1, 'assets/img/weapon/thunder.svg'),
+(9, 'Poisoned Dagger', 300, 10, 10, 0, 'assets/img/weapon/dagger.svg'),
+(10, 'Kunai', 40, 4, 3, 0, 'assets/img/weapon/kunai.svg'),
+(11, 'Iron Mace', 350, 25, 0, 0, 'assets/img/weapon/iron-mace.svg'),
+(12, 'Holy Shovel', 3000, 100, 0, 0, 'assets/img/weapon/shovel.svg');
 
 CREATE TABLE `zones` (
   `id` int(11) NOT NULL,
@@ -109,68 +73,38 @@ CREATE TABLE `zones` (
   `limiter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `zones`
---
-
 INSERT INTO `zones` (`id`, `name`, `bg`, `limiter`) VALUES
 (1, 'dark', 'assets/img/bg/black.svg', 20),
 (2, 'water', 'assets/img/bg/water.svg', 20),
 (3, 'sky', 'assets/img/bg/light.svg', 20),
 (4, 'underground', 'assets/img/bg/underground.svg', -1);
 
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `monsters`
---
 ALTER TABLE `monsters`
   ADD PRIMARY KEY (`id`);
 
---
--- Index pour la table `users`
---
+ALTER TABLE `saves`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
 
---
--- Index pour la table `weapons`
---
 ALTER TABLE `weapons`
   ADD PRIMARY KEY (`id`);
 
---
--- Index pour la table `zones`
---
 ALTER TABLE `zones`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `monsters`
---
 ALTER TABLE `monsters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `saves`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
---
--- AUTO_INCREMENT pour la table `weapons`
---
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 ALTER TABLE `weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- AUTO_INCREMENT pour la table `zones`
---
 ALTER TABLE `zones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
