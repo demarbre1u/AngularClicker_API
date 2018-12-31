@@ -1,6 +1,7 @@
 "use strict";
 
 import WeaponBase from "./weapon";
+import WeaponByType from "./weapon-by-type";
 
 module.exports = (router, middlewares) => {
 
@@ -13,4 +14,9 @@ module.exports = (router, middlewares) => {
     router.route('/weapons')
         .all(baseWeapon.all)
         .get(baseWeapon.get)
+
+    const weaponByType = new WeaponByType()
+    router.route('/weapons/type/:type')
+        .all(weaponByType.all)
+        .get(weaponByType.get)
 };

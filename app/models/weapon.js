@@ -66,6 +66,10 @@ class Weapon extends Bookshelf.Model {
             if (! val instanceof Number) throw new Error("The ID is not valid Number");
         }],
 
+        Type: ['required', val => {
+            if (! val instanceof Number) throw new Error("The ID is not valid Number");
+        }],
+
         Src: ['required', 'src'],
     }}
 
