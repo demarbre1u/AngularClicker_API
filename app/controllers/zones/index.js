@@ -1,6 +1,7 @@
 "use strict";
 
 import ZoneBase from "./zone";
+import ZoneById from "./zone-by-id";
 
 module.exports = (router, middlewares) => {
 
@@ -13,4 +14,9 @@ module.exports = (router, middlewares) => {
     router.route('/zones')
         .all(baseZone.all)
         .get(baseZone.get)
+
+    const zoneById = new ZoneById()
+    router.route('/zones/:id')
+        .all(zoneById.all)
+        .get(zoneById.get)
 };
