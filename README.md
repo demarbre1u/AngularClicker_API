@@ -1,14 +1,8 @@
-# NodeJS MySQL Boilerplate
-
-This app defines a very neat and modular structure to start you next nodejs project.
-
-Using: MySQL, NodeJS, Express, Bookshelf, Knex, Json Web Token(JWT)
-
-Using ES6, with Babel (http://babeljs.io/)
-
-## Boilerplate
+# Angular Clicker API
 
 This API is based on a boilerplate you can find [here](https://github.com/raghavgarg1257/nodejs-mysql-boilerplate).
+
+It is used by my Angular Clicker project. You can find the source code of this project [here](https://github.com/demarbre1u/AngularClicker).
 
 ## Pre-requisites:
 1. NodeJS (https://nodejs.org/en/)
@@ -18,21 +12,11 @@ This API is based on a boilerplate you can find [here](https://github.com/raghav
 ## Steps to run:
 ```
 git clone git@gitlab.com:raghavgarg1257/nodejs-mysql-boilerplate.git
-cd nodejs-mysql-boilerplate
-cp env.example .env
-nano .env #now edit credentials according to your machine (mandatory for db connection)
+cd AngularClicker_API
 npm install
 ```
-Now to migrate Database
-```
-npm install knex -g
+To install the base data used by the Angular Clicker project, a SQL file is available in the root directory. Simply import it to your MySQL database.
 
-# To create the tables
-npm run migrate-up
-
-# To drop the tables
-npm run migrate-down
-```
 Now to start the server
 ```
 npm start
@@ -41,21 +25,35 @@ The app will be started on the mentioned port which will be printed in the conso
 
 
 ## Available routes
+
+### Users
 ```
--> GET / : (open*) Just show the message
--> POST / : (open*) Another message.
-
--> GET /users : (open*) Show all the users in the app
--> POST /users [name, phone, email] : (open*) Add new user (generate jwt token)
-
--> GET /users:id : (protected*) Get the user info by id
--> PUT /users:id [name, phone, email](optional) : (protected*) Update the user info by id
--> DELETE /users:id : (protected*) Delete the user by id
-
--> GET /users:id/address : (protected*) Show all the address got the user by id
--> POST /users:id/address [line1, line2, state, pincode, landmark] : (protected*) Add new address to the user by id
-
-# guide
-open* - means route is un-protected, anyone can access the route
-protected* - means a valid jwt token has to be used to access the route in header "Authorization" with value "Bearer {token}"
+-> GET /users : Show all the users in the app
+-> POST /users : Add a new user
+-> GET /users/:id : Get the user info by id
+-> PUT /users/:id : Update a user info
+-> GET /users/:id/save : Get the user's save info by id
+-> GET /users/:name : Get the user info by name
+```
+### Saves
+```
+-> GET /saves : Show all the saves in the app
+-> POST /saves : Add a new save
+-> GET /saves/:id : Show the data of a save 
+-> PUT /saves/:id : Update the data of a save
+```
+### Monsters
+```
+-> GET /monsters : Show all the monsters in the app
+-> GET /monsters/:id_zone/zones : Show the data of monsters that belong to a given zone 
+```
+### Zones
+```
+-> GET /zones : Show all the zones in the app
+-> GET /zones/:id : Show the data of a given zone
+```
+### Weapons
+```
+-> GET /weapons : Show all the weapons in the app
+-> GET /weapons/type/:type : Show the data the weapons that belong to a given weapon type
 ```
